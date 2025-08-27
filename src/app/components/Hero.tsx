@@ -252,7 +252,7 @@ export default function Hero() {
             <p className="text-gray-500 flex items-center justify-center gap-2 font-medium">
               <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
               Más de{" "}
-              <span className="text-gray-700 font-semibold">20 empresas</span> ya
+              <span className="text-gray-700 font-semibold">50 empresas</span> ya
               confían en Powerfly
             </p>
           </div>

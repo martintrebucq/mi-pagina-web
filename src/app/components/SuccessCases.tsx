@@ -117,7 +117,7 @@ export default function SuccessCases() {
               
               {/* Testimonial */}
               <p className="body-md text-gray-700 mb-8 leading-relaxed italic">
-                "{testimonial.testimonial}"
+                “{testimonial.testimonial}”
               </p>
 
               {/* Stats unificadas */}
