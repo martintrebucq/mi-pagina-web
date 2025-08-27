@@ -7,7 +7,7 @@ import Script from "next/script"; // 👈 Import necesario
 const faqs = [
     {
       question: "¿Qué incluye exactamente Powerfly Connect (CRM)?",
-      answer: "Powerfly Connect es nuestra plataforma CRM completa basada en GoHighLevel que incluye: gestión de contactos, automatización de campañas por email y SMS, embudos de ventas, calendarios de citas, sitios web integrados, reportes en tiempo real, y integración nativa con WhatsApp. Lo entregas completamente configurado y listo para usar."
+      answer: "Powerfly Connect es nuestra plataforma CRM completa que incluye: gestión de contactos, automatización de campañas por email y SMS, embudos de ventas, calendarios de citas, sitios web integrados, reportes en tiempo real, y integración nativa con WhatsApp. Lo entregamos completamente configurado y listo para usar."
     },
     {
       question: "¿Cuánto tiempo toma la implementación y qué incluye?",
@@ -15,7 +15,7 @@ const faqs = [
     },
     {
       question: "¿Puedo integrar Powerfly Connect con mis sistemas actuales?",
-      answer: "Sí, Powerfly Connect se integra nativamente con más de 1,000 aplicaciones incluyendo: Shopify, WooCommerce, WordPress, Facebook/Meta, Google, Zapier, Calendly, Stripe, PayPal, y muchas más. Todas las integraciones disponibles en el ecosistema GoHighLevel están incluidas."
+      answer: "Sí, Powerfly Connect se integra nativamente con más de 1,000 aplicaciones incluyendo: Shopify, WooCommerce, WordPress, Facebook/Meta, Google, Zapier, Calendly, Stripe, PayPal, y muchas más. Todas las integraciones disponibles en el ecosistema están incluidas."
     },
     {
       question: "¿El sistema funciona para mi tipo de negocio?",
