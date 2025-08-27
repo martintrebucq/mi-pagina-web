@@ -7,11 +7,11 @@ import { Menu, X } from "lucide-react";
 
 // --- Overlay de flujo de datos con direcciones aleatorias sobre la grilla ---
 function DataFlowOverlay({
-  grid = 48, // tamaño de celda de la grilla de fondo
-  density = 0.28, // densidad relativa de partículas
-  minSpeed = 55, // px/seg
-  maxSpeed = 130, // px/seg
-  size = 2.1, // radio del punto en px
+  grid = 48,
+  density = 0.28,
+  minSpeed = 55,
+  maxSpeed = 130,
+  size = 2.1,
 }: {
   grid?: number;
   density?: number;
@@ -21,13 +21,15 @@ function DataFlowOverlay({
 }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafRef = useRef<number>(0);
-  const particlesRef = useRef<{
-    x: number;
-    y: number;
-    axis: "h" | "v"; // línea horizontal o vertical
-    dir: -1 | 1; // dirección sobre esa línea
-    speed: number;
-  }[]>([]);
+  const particlesRef = useRef<
+    {
+      x: number;
+      y: number;
+      axis: "h" | "v";
+      dir: -1 | 1;
+      speed: number;
+    }[]
+  >([]);
 
   const reduceMotion =
     typeof window !== "undefined" &&
@@ -43,7 +45,7 @@ function DataFlowOverlay({
     canvas.style.width = `${w}px`;
     canvas.style.height = `${h}px`;
     const ctx = canvas.getContext("2d")!;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // dibujar en unidades CSS
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     return { w, h };
   };
 
@@ -62,14 +64,14 @@ function DataFlowOverlay({
     }[] = [];
 
     for (let i = 0; i < count; i++) {
-      const isH = Math.random() < 0.5; // mitad horizontales, mitad verticales aprox
-      const dir: -1 | 1 = Math.random() < 0.5 ? -1 : 1; // dirección aleatoria
+      const isH = Math.random() < 0.5;
+      const dir: -1 | 1 = Math.random() < 0.5 ? -1 : 1;
       const speed = minSpeed + Math.random() * (maxSpeed - minSpeed);
 
       if (isH) {
         const r = Math.floor(Math.random() * rows);
-        const y = r * grid + 0.5; // ajuste para nitidez
-        const x = Math.random() * (w + grid * 2) - grid; // permitir spawn fuera para fluidez
+        const y = r * grid + 0.5;
+        const x = Math.random() * (w + grid * 2) - grid;
         arr.push({ x, y, axis: "h", dir, speed });
       } else {
         const c = Math.floor(Math.random() * cols);
@@ -98,7 +100,7 @@ function DataFlowOverlay({
     let last = performance.now();
 
     const loop = (t: number) => {
-      const dt = Math.min(0.05, (t - last) / 1000); // cap 50ms para estabilidad
+      const dt = Math.min(0.05, (t - last) / 1000);
       last = t;
 
       const w = canvas.clientWidth;
@@ -106,8 +108,7 @@ function DataFlowOverlay({
 
       ctx.clearRect(0, 0, w, h);
 
-      // estilo del destello
-      ctx.fillStyle = "rgba(57, 94, 244, 0.9)"; // azul Powerfly
+      ctx.fillStyle = "rgba(57, 94, 244, 0.9)";
       ctx.shadowColor = "rgba(57, 94, 244, 0.8)";
       ctx.shadowBlur = 6;
 
@@ -115,22 +116,18 @@ function DataFlowOverlay({
         const d = p.speed * dt;
         if (p.axis === "h") {
           p.x += d * p.dir;
-          // wrap horizontal con margen
           if (p.x < -grid) p.x = w + grid;
           if (p.x > w + grid) p.x = -grid;
         } else {
           p.y += d * p.dir;
-          // wrap vertical con margen
           if (p.y < -grid) p.y = h + grid;
           if (p.y > h + grid) p.y = -grid;
         }
 
-        // punto
         ctx.beginPath();
         ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
         ctx.fill();
 
-        // rastro sutil hacia atrás
         ctx.shadowBlur = 10;
         ctx.strokeStyle = "rgba(57, 94, 244, 0.45)";
         ctx.lineWidth = 1.1;
@@ -157,7 +154,6 @@ function DataFlowOverlay({
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("resize", resize);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [grid, density, minSpeed, maxSpeed, size]);
 
   return (
@@ -218,15 +214,15 @@ export default function Hero() {
         }}
       />
 
-      {/* Overlay de flujo de datos sobre líneas de grilla */}
+      {/* Overlay */}
       <DataFlowOverlay grid={48} density={0.3} minSpeed={60} maxSpeed={140} size={2.1} />
 
       {/* NAVBAR */}
       <header
         className={`fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${
           scrolled
-            ? "mt-6 bg-white/90 backdrop-blur-lg shadow-lg rounded-2xl py-2 px-8 w-[98%] max-w-7xl"
-            : "mt-4 py-3 px-8 bg-transparent w-[98%] max-w-7xl"
+            ? "mt-6 bg-white/90 backdrop-blur-lg shadow-lg rounded-2xl py-2 px-4 sm:px-8 w-[98%] max-w-7xl"
+            : "mt-4 py-3 px-4 sm:px-8 bg-transparent w-[98%] max-w-7xl"
         } ${menuOpen && !scrolled ? "bg-white/95 backdrop-blur-lg shadow-lg rounded-2xl" : ""}`}
       >
         <div className="flex items-center justify-between">
@@ -236,8 +232,8 @@ export default function Hero() {
               <Image
                 src="/logo-color.png"
                 alt="Powerfly Logo"
-                width={140}
-                height={50}
+                width={120}
+                height={44}
                 priority
                 className={`cursor-pointer transition-transform hover:scale-105 object-contain ${
                   scrolled ? "pt-1.5" : ""
@@ -278,15 +274,15 @@ export default function Hero() {
 
         {/* Menu Mobile */}
         {menuOpen && (
-          <nav className="lg:hidden mt-4 pt-4 border-t border-gray-200 bg-white/95 backdrop-blur-md rounded-xl shadow-lg -mx-6 px-6 py-4">
-            <div className="flex flex-col space-y-3">
+          <nav className="lg:hidden mt-3 pt-3 border-t border-gray-200 bg-white/95 backdrop-blur-md rounded-xl shadow-lg -mx-3 sm:-mx-6 px-3 sm:px-6 py-3">
+            <div className="flex flex-col space-y-2.5">
               {menuItems.map((item) => (
                 <a key={item.label} href={item.href} onClick={() => setMenuOpen(false)} className="text-gray-700 hover:text-gray-900 font-medium py-3 px-4 rounded-lg hover:bg-gray-50 transition-all text-base border border-gray-100">
                   {item.label}
                 </a>
               ))}
             </div>
-            <div className="flex items-center justify-center space-x-4 mt-6 pt-4 border-t border-gray-200">
+            <div className="flex items-center justify-center space-x-4 mt-5 pt-3 border-t border-gray-200">
               <a href="https://www.instagram.com/powerfly.agency/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-gray-50 hover:bg-gray-100 hover:text-pink-600 transition-all">
                 <FaInstagram size={22} />
               </a>
@@ -299,46 +295,57 @@ export default function Hero() {
       </header>
 
       {/* HERO CONTENT */}
-      <div className="relative z-10 flex flex-col justify-center items-center min-h-screen w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className={`max-w-4xl text-gray-900 transition-all duration-700 mb-8 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-6">
+      <div className="relative z-10 flex flex-col justify-center items-center min-h-screen w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center
+                      pt-28 sm:pt-36"> {/* padding top extra para que no choque con el header */}
+        <div className={`max-w-4xl text-gray-900 transition-all duration-700 mb-6 sm:mb-8 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+          {/* Título más contenido en mobile */}
+          <h1 className="text-[28px] leading-tight sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-4 sm:mb-6">
             Todo lo que tu negocio necesita, <span className="text-[#395ef4]">en un solo lugar</span>
           </h1>
 
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-8 px-2">
+          {/* Descripción un poco más compacta en mobile */}
+          <p className="text-sm sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-6 sm:mb-8 px-1">
             Con <span className="font-semibold text-[#395ef4]">Powerfly Connect (CRM)</span>, nuestros servicios de marketing y módulos independientes a medida, impulsamos tu empresa con soluciones digitales que crecen junto a vos.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          {/* CTA más chica en mobile */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-10">
             <a
               href="https://wa.me/5493513661138?text=%C2%A1Quiero%20probar%20PowerFly%20Connect!"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#395ef4] hover:bg-[#2f4bd6] text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 w-full sm:w-auto shadow-lg transform hover:scale-105 hover:shadow-xl text-center"
+              className="bg-[#395ef4] hover:bg-[#2f4bd6] text-white font-semibold
+                         py-3 px-5 text-sm rounded-lg
+                         sm:py-4 sm:px-8 sm:text-base sm:rounded-xl
+                         transition-all duration-300 w-full sm:w-auto shadow-lg transform hover:scale-105 hover:shadow-xl text-center"
             >
               Probar Powerfly Connect
             </a>
           </div>
 
-          <div className="text-center mb-6">
-            <p className="text-gray-500 flex items-center justify-center gap-2 font-medium">
-              <span className="inline-block w-2 h-2 bg-green-500 rounded-full" />
-              Más de <span className="text-gray-700 font-semibold">50 empresas</span> ya confían en Powerfly
+          {/* Línea “Más de 50 empresas…” reducida y en 2 renglones en mobile */}
+          <div className="text-center mb-4 sm:mb-6">
+            <p className="text-gray-500 font-medium text-xs sm:text-sm leading-snug max-w-[260px] sm:max-w-none mx-auto
+                           sm:flex sm:items-center sm:justify-center sm:gap-2">
+              <span className="inline-block w-2 h-2 bg-green-500 rounded-full align-middle mr-2 sm:mr-0" />
+              <span>
+                Más de <span className="text-gray-700 font-semibold">50 empresas</span>
+                <br className="sm:hidden" /> ya confían en Powerfly
+              </span>
             </p>
           </div>
         </div>
 
-        {/* Integraciones (carrusel continuo sin saltos + fade en bordes) */}
+        {/* Integraciones (carrusel) */}
         <div className="w-full max-w-6xl mx-auto">
-          <div className="text-center mb-8">
+          <div className="text-center mb-6 sm:mb-8">
             <p className="text-gray-500">
-              Integraciones nativas del {" "}
+              Integraciones nativas del{" "}
               <span className="hover:text-[#395ef4] transition-colors duration-300 cursor-pointer">CRM Powerfly Connect</span>
             </p>
           </div>
 
           <div className="relative overflow-hidden select-none">
-            {/* Sin blur blanco: aplicamos mask para desvanecer logos en bordes */}
             <div className="marquee fade-mask will-change-transform">
               <div className="marquee__track">
                 {integrationLogos.map((logo, i) => (
@@ -387,7 +394,6 @@ export default function Hero() {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
-        /* Fade solo de logos en los bordes usando máscara */
         .fade-mask {
           -webkit-mask-image: linear-gradient(to right, transparent 0, black 40px, black calc(100% - 40px), transparent 100%);
                   mask-image: linear-gradient(to right, transparent 0, black 40px, black calc(100% - 40px), transparent 100%);
