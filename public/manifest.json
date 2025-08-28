@@ -1,0 +1,70 @@
+{
+  "name": "Powerfly Agency - CRM + Marketing + Software",
+  "short_name": "Powerfly",
+  "description": "Transforma tu negocio con Powerfly Connect: CRM completo, marketing digital y desarrollo de software. Soluciones digitales que crecen contigo.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#395ef4",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "es-AR",
+  "dir": "ltr",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/logo-color.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo-color.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/logo-color.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Powerfly Connect Dashboard"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Agendar Consulta",
+      "short_name": "Agendar",
+      "description": "Agendar una consulta con Powerfly Agency",
+      "url": "/#contacto",
+      "icons": [
+        {
+          "src": "/logo-color.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Ver Ecosistema",
+      "short_name": "Ecosistema",
+      "description": "Explorar el ecosistema Powerfly",
+      "url": "/#pfconnect",
+      "icons": [
+        {
+          "src": "/logo-color.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://powerfly.agency"
+    }
+  ],
+  "prefer_related_applications": false
+}

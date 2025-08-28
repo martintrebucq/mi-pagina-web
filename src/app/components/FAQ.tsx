@@ -5,27 +5,46 @@ import { useState } from "react";
 import Script from "next/script"; // 👈 Import necesario
 
 const faqs = [
-    {
-      question: "¿Qué incluye exactamente Powerfly Connect (CRM)?",
-      answer: "Powerfly Connect es nuestra plataforma CRM completa que incluye: gestión de contactos, automatización de campañas por email y SMS, embudos de ventas, calendarios de citas, sitios web integrados, reportes en tiempo real, y integración nativa con WhatsApp. Lo entregamos completamente configurado y listo para usar."
+  {
+    question: "¿Qué incluye exactamente Powerfly Connect (CRM)?",
+    answer:
+      "Powerfly Connect es nuestra plataforma CRM completa que incluye: gestión de contactos, automatización de campañas por email y SMS, embudos de ventas, calendarios de citas, sitios web integrados, reportes en tiempo real, y integración nativa con WhatsApp. Lo entregamos completamente configurado y listo para usar.",
+  },
+  {
+    question: "¿Cuánto tiempo toma la implementación y qué incluye?",
+    answer:
+      "La implementación toma entre 1-2 semanas. Te entregamos todo completamente instalado y configurado: CRM personalizado, automatizaciones funcionando, integraciones conectadas, y capacitación completa para tu equipo. Incluye reuniones semanales de seguimiento y soporte continuo por WhatsApp.",
+  },
+  {
+    question: "¿Puedo integrar Powerfly Connect con mis sistemas actuales?",
+    answer:
+      "Sí, Powerfly Connect se integra nativamente con más de 1,000 aplicaciones incluyendo: Shopify, WooCommerce, WordPress, Facebook/Meta, Google, Zapier, Calendly, Stripe, PayPal, y muchas más. Todas las integraciones disponibles en el ecosistema están incluidas.",
+  },
+  {
+    question: "¿El sistema funciona para mi tipo de negocio?",
+    answer:
+      "Absolutamente. Powerfly Connect es altamente personalizable y funciona para cualquier industria: agencias, consultores, e-commerce, servicios profesionales, salud, fitness, bienes raíces, y más. Configuramos los embudos, automatizaciones y workflows específicos para tu modelo de negocio.",
+  },
+  {
+    question: "¿Cuáles son los planes y qué soporte recibo?",
+    answer:
+      "Nuestros planes van desde $299 USD/mes (CRM completo) hasta $1,500 USD/mes (CRM + Marketing + Desarrollo). Incluyes: soporte por WhatsApp, reuniones semanales de seguimiento, capacitación completa del equipo, actualizaciones automáticas, y acceso a todas las funcionalidades. Agenda una consulta para recibir tu propuesta personalizada.",
+  },
+];
+
+// FAQ Schema for SEO
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
     },
-    {
-      question: "¿Cuánto tiempo toma la implementación y qué incluye?",
-      answer: "La implementación toma entre 1-2 semanas. Te entregamos todo completamente instalado y configurado: CRM personalizado, automatizaciones funcionando, integraciones conectadas, y capacitación completa para tu equipo. Incluye reuniones semanales de seguimiento y soporte continuo por WhatsApp."
-    },
-    {
-      question: "¿Puedo integrar Powerfly Connect con mis sistemas actuales?",
-      answer: "Sí, Powerfly Connect se integra nativamente con más de 1,000 aplicaciones incluyendo: Shopify, WooCommerce, WordPress, Facebook/Meta, Google, Zapier, Calendly, Stripe, PayPal, y muchas más. Todas las integraciones disponibles en el ecosistema están incluidas."
-    },
-    {
-      question: "¿El sistema funciona para mi tipo de negocio?",
-      answer: "Absolutamente. Powerfly Connect es altamente personalizable y funciona para cualquier industria: agencias, consultores, e-commerce, servicios profesionales, salud, fitness, bienes raíces, y más. Configuramos los embudos, automatizaciones y workflows específicos para tu modelo de negocio."
-    },
-    {
-      question: "¿Cuáles son los planes y qué soporte recibo?",
-      answer: "Nuestros planes van desde $299 USD/mes (CRM completo) hasta $1,500 USD/mes (CRM + Marketing + Desarrollo). Incluyes: soporte por WhatsApp, reuniones semanales de seguimiento, capacitación completa del equipo, actualizaciones automáticas, y acceso a todas las funcionalidades. Agenda una consulta para recibir tu propuesta personalizada."
-    }
-  ];
+  })),
+};
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -35,8 +54,16 @@ export default function FAQ() {
   };
 
   return (
-    <section id="contacto" className="relative py-20 sm:py-24 lg:py-28 bg-gradient-to-br from-slate-50 to-blue-50 overflow-hidden">
-      
+    <section
+      id="contacto"
+      className="relative py-20 sm:py-24 lg:py-28 bg-gradient-to-br from-slate-50 to-blue-50 overflow-hidden"
+    >
+      {/* FAQ Schema for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* Fondo decorativo */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/4 left-0 w-72 h-72 bg-blue-200/20 rounded-full blur-3xl" />
@@ -51,13 +78,15 @@ export default function FAQ() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Calendario GoHighLevel */}
-        <div id="agenda"className="mb-16">
+        {/* Calendario GoHighLevel */}
+        <div id="agenda" className="mb-16">
           <iframe
             src="https://api.leadconnectorhq.com/widget/booking/WIK0rfbuSDXE4IG3h0xw"
             style={{ width: "100%", border: "none", overflow: "hidden" }}
             scrolling="no"
             id="WIK0rfbuSDXE4IG3h0xw_1756228843842"
+            title="Agendar consulta con Powerfly Agency"
+            aria-label="Calendario para agendar consulta"
           />
           <Script
             src="https://link.msgsndr.com/js/form_embed.js"
@@ -86,7 +115,7 @@ export default function FAQ() {
           >
             Preguntas <span className="text-[#395ef4]">Frecuentes</span>
           </motion.h2>
-          
+
           <motion.p
             className="body-lg text-gray-600 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
@@ -94,7 +123,8 @@ export default function FAQ() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Resolvemos las dudas más comunes sobre nuestros servicios y metodología de trabajo.
+            Resolvemos las dudas más comunes sobre nuestros servicios y
+            metodología de trabajo.
           </motion.p>
         </div>
 
@@ -124,7 +154,7 @@ export default function FAQ() {
                   )}
                 </div>
               </button>
-              
+
               {openIndex === index && (
                 <motion.div
                   initial={{ height: 0, opacity: 0 }}
@@ -158,7 +188,7 @@ export default function FAQ() {
           <p className="body-lg text-gray-600 mb-10">
             Hablemos directamente. Agenda una consulta gratuita de 30 minutos.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#agenda"

@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://powerfly.agency/sitemap.xml
+
+# Crawl delay (optional - helps with server load)
+Crawl-delay: 1
+
+# Disallow admin areas if you have them
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all content
+Allow: /components/
+Allow: /public/
+Allow: /src/

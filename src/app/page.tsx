@@ -1,3 +1,4 @@
+
 import Hero from "./components/Hero";
 import Ecosystem from "./components/Ecosystem";
 import SuccessCases from "./components/SuccessCases"; // NUEVA SECCIÓN

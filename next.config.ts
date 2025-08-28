@@ -1,35 +1,96 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Exporta HTML estático en /out
-  output: "export",
+  /* config options here */
+  experimental: {
+    optimizePackageImports: ["framer-motion", "lucide-react", "react-icons"],
+  },
 
-  // Opcional pero recomendado para hosting estático tipo Apache/Nginx
-  trailingSlash: true,
-
+  // Image optimization
   images: {
-    // Necesario cuando hacés export estático (next/image sin optimizador)
-    unoptimized: true,
-    remotePatterns: [
+    formats: ["image/webp", "image/avif"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+
+  // Headers for security and performance
+  async headers() {
+    return [
       {
-        protocol: 'https',
-        hostname: 'storage.googleapis.com',
-        port: '',
-        pathname: '/msgsndr/**',
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
       },
       {
-        protocol: 'https',
-        hostname: 'html.tailus.io',
-        port: '',
-        pathname: '/blocks/customers/**',
+        source: "/sitemap.xml",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "application/xml",
+          },
+        ],
       },
       {
-        protocol: 'https',
-        hostname: 'www.powerfly.agency',
-        port: '',
-        pathname: '/**',
-      }
-    ],
+        source: "/robots.txt",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "text/plain",
+          },
+        ],
+      },
+    ];
+  },
+
+  // Redirects for better SEO
+  async redirects() {
+    return [
+      {
+        source: "/home",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/index",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
+
+  // Compiler options for better performance
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
+
+  // Webpack configuration for better bundle optimization
+  webpack: (config, { dev, isServer }) => {
+    // Optimize bundle size in production
+    if (!dev && !isServer) {
+      config.optimization.splitChunks.chunks = "all";
+      config.optimization.minimize = true;
+    }
+
+    return config;
   },
 };
 
