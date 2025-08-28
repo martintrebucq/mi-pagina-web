@@ -157,11 +157,7 @@ function DataFlowOverlay({
   }, [grid, density, minSpeed, maxSpeed, size]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 pointer-events-none z-[1]"
-      aria-hidden
-    />
+    <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none z-[1]" aria-hidden />
   );
 }
 
@@ -229,27 +225,14 @@ export default function Hero() {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="https://www.powerfly.agency" target="_blank" rel="noopener noreferrer" className="flex items-center">
-              <Image
-                src="/logo-color.png"
-                alt="Powerfly Logo"
-                width={120}
-                height={44}
-                priority
-                className={`cursor-pointer transition-transform hover:scale-105 object-contain ${
-                  scrolled ? "pt-1.5" : ""
-                }`}
-              />
+              <Image src="/logo-color.png" alt="Powerfly Logo" width={120} height={44} priority className={`cursor-pointer transition-transform hover:scale-105 object-contain ${scrolled ? "pt-1.5" : ""}`} />
             </Link>
           </div>
 
           {/* Menu Desktop */}
           <nav className="hidden lg:flex items-center space-x-8">
             {menuItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="relative group text-gray-700 hover:text-gray-900 transition-colors py-2 font-medium text-base"
-              >
+              <a key={item.label} href={item.href} className="relative group text-gray-700 hover:text-gray-900 transition-colors py-2 font-medium text-base">
                 <span>{item.label}</span>
                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#395ef4] transition-all duration-300 group-hover:w-full" style={{ height: "1px" }} />
               </a>
@@ -295,8 +278,8 @@ export default function Hero() {
       </header>
 
       {/* HERO CONTENT */}
-      <div className="relative z-10 flex flex-col justify-center items-center min-h-screen w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center
-                      pt-28 sm:pt-36"> {/* padding top extra para que no choque con el header */}
+      <div className="relative z-10 flex flex-col justify-center items-center min-h-screen w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-36 sm:pt-40">
+        {/* padding top extra para que no choque con el header */}
         <div className={`max-w-4xl text-gray-900 transition-all duration-700 mb-6 sm:mb-8 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
           {/* Título más contenido en mobile */}
           <h1 className="text-[28px] leading-tight sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-4 sm:mb-6">
@@ -304,20 +287,17 @@ export default function Hero() {
           </h1>
 
           {/* Descripción un poco más compacta en mobile */}
-          <p className="text-sm sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-6 sm:mb-8 px-1">
+          <p className="text-sm sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-5 sm:mb-8 px-1">
             Con <span className="font-semibold text-[#395ef4]">Powerfly Connect (CRM)</span>, nuestros servicios de marketing y módulos independientes a medida, impulsamos tu empresa con soluciones digitales que crecen junto a vos.
           </p>
 
-          {/* CTA más chica en mobile */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-10">
+          {/* CTA más chica en mobile (TODO: mantener TODO en una sola línea) */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-5 sm:mb-10">
             <a
               href="https://wa.me/5493513661138?text=%C2%A1Quiero%20probar%20PowerFly%20Connect!"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#395ef4] hover:bg-[#2f4bd6] text-white font-semibold
-                         py-3 px-5 text-sm rounded-lg
-                         sm:py-4 sm:px-8 sm:text-base sm:rounded-xl
-                         transition-all duration-300 w-full sm:w-auto shadow-lg transform hover:scale-105 hover:shadow-xl text-center"
+              className="bg-[#395ef4] hover:bg-[#2f4bd6] text-white font-semibold py-2.5 px-4 text-[13px] rounded-lg sm:py-4 sm:px-8 sm:text-base sm:rounded-xl transition-all duration-300 w-full sm:w-auto shadow-lg transform hover:scale-105 hover:shadow-xl text-center"
             >
               Probar Powerfly Connect
             </a>
@@ -325,8 +305,7 @@ export default function Hero() {
 
           {/* Línea “Más de 50 empresas…” reducida y en 2 renglones en mobile */}
           <div className="text-center mb-4 sm:mb-6">
-            <p className="text-gray-500 font-medium text-xs sm:text-sm leading-snug max-w-[260px] sm:max-w-none mx-auto
-                           sm:flex sm:items-center sm:justify-center sm:gap-2">
+            <p className="text-gray-500 font-medium text-[11px] sm:text-sm leading-snug max-w-[220px] sm:max-w-none mx-auto sm:flex sm:items-center sm:justify-center sm:gap-2">
               <span className="inline-block w-2 h-2 bg-green-500 rounded-full align-middle mr-2 sm:mr-0" />
               <span>
                 Más de <span className="text-gray-700 font-semibold">50 empresas</span>
@@ -350,30 +329,12 @@ export default function Hero() {
               <div className="marquee__track">
                 {integrationLogos.map((logo, i) => (
                   <div key={`a-${i}`} className="flex-shrink-0 w-28 sm:w-32 flex items-center justify-center px-4 py-3">
-                    <Image
-                      src={logo.url}
-                      alt={`Integration ${logo.name}`}
-                      width={160}
-                      height={48}
-                      className="h-8 sm:h-10 lg:h-12 w-auto object-contain transition-transform duration-200"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = "none";
-                      }}
-                    />
+                    <Image src={logo.url} alt={`Integration ${logo.name}`} width={160} height={48} className="h-8 sm:h-10 lg:h-12 w-auto object-contain transition-transform duration-200" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
                   </div>
                 ))}
                 {integrationLogos.map((logo, i) => (
                   <div key={`b-${i}`} className="flex-shrink-0 w-28 sm:w-32 flex items-center justify-center px-4 py-3">
-                    <Image
-                      src={logo.url}
-                      alt={`Integration ${logo.name}`}
-                      width={160}
-                      height={48}
-                      className="h-8 sm:h-10 lg:h-12 w-auto object-contain transition-transform duration-200"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = "none";
-                      }}
-                    />
+                    <Image src={logo.url} alt={`Integration ${logo.name}`} width={160} height={48} className="h-8 sm:h-10 lg:h-12 w-auto object-contain transition-transform duration-200" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
                   </div>
                 ))}
               </div>
@@ -410,3 +371,4 @@ export default function Hero() {
     </section>
   );
 }
+  

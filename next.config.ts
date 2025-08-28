@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Exporta HTML estático en /out
+  output: "export",
+
+  // Opcional pero recomendado para hosting estático tipo Apache/Nginx
+  trailingSlash: true,
+
   images: {
+    // Necesario cuando hacés export estático (next/image sin optimizador)
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -15,7 +23,6 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/blocks/customers/**',
       },
-      // Agrega otros dominios que uses para imágenes
       {
         protocol: 'https',
         hostname: 'www.powerfly.agency',
